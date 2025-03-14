@@ -26,10 +26,20 @@
 
         kebabButton.click();
 
-        setTimeout(() => {
+        const clickEditButton = () => {
             const editBtn = Array.from(document.querySelectorAll('.prc-ActionList-ItemLabel-TmBhn'))
                 .find(el => el.textContent.trim() === 'Edit');
-            if (editBtn) editBtn.click();
+            if (editBtn) {
+                editBtn.click();
+                return true;
+            }
+            return false;
+        };
+
+        setTimeout(() => {
+            if (!clickEditButton()) {
+                setTimeout(clickEditButton, 400);
+            }
         }, 100);
     });
 })();

@@ -1,9 +1,10 @@
 // ==UserScript==
 // @name         GitHub Markdown Write/Preview Toggle
 // @namespace    https://github.com/xingtong-jiang
-// @version      1.0
+// @version      1.1
 // @description  Press Ctrl+Shift+X to quickly toggle Write/Preview mode when editing Markdown on GitHub issues.
 // @match        https://github.com/*/issues/*
+// @match        https://github.com/*/pull/*
 // @grant        none
 // ==/UserScript==
 
@@ -22,6 +23,10 @@
                 previewTab.click();
             } else {
                 writeTab.click();
+                setTimeout(() => {
+                    const textArea = document.querySelector('textarea.MarkdownInput-module__textArea--QjIwG');
+                    if (textArea) textArea.focus();
+                }, 100);
             }
 
             e.preventDefault();
